@@ -38,6 +38,8 @@ def writeToFile(matrix, fileName):
     Writes a matrix out to a file
     """
 
+
+
     with open(fileName, 'w') as file:
         for row in matrix:
             for col in row:
