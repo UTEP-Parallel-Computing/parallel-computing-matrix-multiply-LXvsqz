@@ -4,10 +4,12 @@
 #!/usr/bin/env python3
 import argparse
 import numpy as np
+import time
+
 
 # Testing if github works, first commit
 
-def genMatrix(size=3, value=5):
+def genMatrix(size=200, value=5):
     """
     Generates a 2d square matrix of the specified size with the specified values
     """
@@ -16,7 +18,7 @@ def genMatrix(size=3, value=5):
 
     return matrix
 
-def genMatrix2(size=3, value=3):
+def genMatrix2(size=200, value=3):
     """
     Generates a 2d square matrix of the specified size with the specified values
     """
@@ -24,7 +26,7 @@ def genMatrix2(size=3, value=3):
     matrix = np.asarray([ np.asarray([value for col in range(0,size)]) for row in range(0,size)])
 
     return matrix
-def genMatrix3(size=3, value=0):
+def genMatrix3(size=200, value=0):
     """
     Generates a 2d square matrix of the specified size with the specified values
     """
@@ -55,15 +57,20 @@ def multiplyMatrices(matrixA, matrixB):
     rowB = getRowLength(matrixB)
     colB = getColLength(matrixB)
 
+    start_time = time.time()
+
     for i in range(0, rowA):  # rows of first matrix
         for j in range(0,colB):  # column of matrixB
             for k in range(0,rowB):  # rows of matrixB
                 product_array[i][j] += matrixA[i][k] * matrixB[k][j]
 
-    return product_array
+    total_time = time.time() - start_time  # current time minus the time we started at
+    print(product_array)
+    print("Time to multiply: %s", total_time)
+
 
 
 array1 = genMatrix()
 array2 = genMatrix2()
 
-print(multiplyMatrices(array1, array2))
+multiplyMatrices(array1,array2)
