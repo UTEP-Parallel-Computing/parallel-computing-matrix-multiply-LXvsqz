@@ -1,13 +1,10 @@
-# The number of columns in matrix one must be the same as the number of rows in matrix 2
-# undefined if they are not the same.
-
 #!/usr/bin/env python3
-import argparse
 import numpy as np
 import time
 
 
-# Testing if github works, first commit
+#  Alex Vasquez
+#  80579070
 
 def genMatrix(size=200, value=5):
     """
@@ -36,6 +33,18 @@ def genMatrix3(size=200, value=0):
     return matrix
 
 
+def printSubarray(matrix, size=10):
+    """
+    Prints the upper left subarray of dimensions size x size of
+    the matrix
+    """
+
+    for row in range(1, 10):
+        for col in range(1, 10):
+            print(f'{matrix[row][col]} ' , end='')
+        print('')
+
+
 def getRowLength(ArrayX):
     return len(ArrayX)
 
@@ -44,28 +53,27 @@ def getColLength(ArrayX):
 
 
 def multiplyMatrices(matrixA, matrixB):
-    #multiply the elements of each row of matrixA by the elements of each column in matrixB
-    #elements of each column in the second matrix
 
     """"
-    Generate the product of two 2d square matrices with specified values
+    Generate the product of two 2d square matrices with specified values and
+    print results along with time of computation
     """
 
-    product_array = genMatrix3()  # array of 0s
+    product_array = genMatrix3()  # array of 0 to hold multiplied values
 
-    rowA = getRowLength(matrixA)
-    rowB = getRowLength(matrixB)
-    colB = getColLength(matrixB)
+    rowA = getRowLength(matrixA)  # length of row from matrixA
+    rowB = getRowLength(matrixB)  # length of row from matrixB
+    colB = getColLength(matrixB)  # length of col from matrixBf
 
     start_time = time.time()
-
     for i in range(0, rowA):  # rows of first matrix
         for j in range(0,colB):  # column of matrixB
             for k in range(0,rowB):  # rows of matrixB
                 product_array[i][j] += matrixA[i][k] * matrixB[k][j]
 
     total_time = time.time() - start_time  # current time minus the time we started at
-    print(product_array)
+
+    printSubarray(product_array, 10)
     print("Time to multiply: %s", total_time)
 
 
@@ -73,4 +81,4 @@ def multiplyMatrices(matrixA, matrixB):
 array1 = genMatrix()
 array2 = genMatrix2()
 
-multiplyMatrices(array1,array2)
+multiplyMatrices(array1, array2)
