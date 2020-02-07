@@ -3,6 +3,7 @@ import argparse
 import numpy as np
 
 # Testing if github works, first commit
+# testing again from the vm 
 
 def genMatrix(size=1024, value=1):
     """
