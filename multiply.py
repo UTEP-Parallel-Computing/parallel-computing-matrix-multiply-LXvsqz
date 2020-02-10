@@ -7,7 +7,7 @@ import pymp
 #  Alex Vasquez
 #  80579070
 
-def genMatrix(size=200, value=5):
+def genMatrix(size=10, value=1):
     """
     Generates a 2d square matrix of the specified size with the specified values
     """
@@ -16,7 +16,7 @@ def genMatrix(size=200, value=5):
 
     return matrix
 
-def genMatrix2(size=200, value=3):
+def genMatrix2(size=10, value=3):
     """
     Generates a 2d square matrix of the specified size with the specified values
     """
@@ -33,7 +33,8 @@ def genMatrix3(size=200, value=100):
 
     return matrix
 
-testArray = pymp.shared.array((200,200),dtype=np.intc)
+testArray = pymp.shared.array((10,10),dtype=np.intc)
+
 
 
 
@@ -81,43 +82,40 @@ def multiplyMatrices(matrixA, matrixB):
     print("Time to multiply: %s", total_time)
     
     
-def parallelMultiply(matrixA, matrixB, matrixC):
+def parallelMultiply(matrixA, matrixB):
     rowA = getRowLength(matrixA)  # length of row from matrixA
     rowB = getRowLength(matrixB)  # length of row from matrixB
     colB = getColLength(matrixB)  # length of col from matrixB
+    length = len(testArray)
     
-    with pymp.Parallel(4) as p:
+    with pymp.Parallel(8) as p:
         
-        
-        start_time = time.time()
+            
+        #start_time = time.time()
     
-        for i in range(0, 200):  # rows of first matrix
-            for j in range(0,200):  # column of matrixB
-                for k in range(0,200):  # rows of matrixB
-                    matrixC[i][j] += matrixA[i][k] * matrixB[k][j]
+        for i in range(0, length):  # rows of first matrix
+            for j in range(0,length):  # column of matrixB
+                for k in p.range(0,length):  # rows of matrixB
+                    testArray[i][j] += matrixA[i][k] * matrixB[k][j]
                     #print("Thread %d", p.thread_num)
+                    
+                    
 
-        total_time = time.time() - start_time  
-    print(printSubarray(matrixC), 10)
+       # total_time = time.time() - start_time  
+    print(printSubarray(testArray), 10)
     
     
-    
-    
-def testParallel():
-    with pymp.Parallel(4) as p:
-        print("Hello from thread {} of {}".format(p.thread_num, p.num_threads))
-
-
-
 array1 = genMatrix()
 array2 = genMatrix2()
 
 
-
-multiplyMatrices(array1,array2)
 print("-------------------------------------------------------------------")
 
-parallelMultiply(array1,array2,testArray)
+multiplyMatrices(array1,array2)
+
+print("-------------------------------------------------------------------")
+
+parallelMultiply(array1,array2)
 
 
 
