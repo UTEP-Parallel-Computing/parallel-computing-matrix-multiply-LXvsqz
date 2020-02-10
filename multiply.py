@@ -7,7 +7,7 @@ import pymp
 #  Alex Vasquez
 #  80579070
 
-def genMatrix(size=10, value=10):
+def genMatrix(size=200, value=10):
     """
     Generates a 2d square matrix of the specified size with the specified values
     """
@@ -18,7 +18,7 @@ def genMatrix(size=10, value=10):
 
 
 
-def genMatrix2(size=10, value=5):
+def genMatrix2(size=200, value=5):
     """
     Generates a 2d square matrix of the specified size with the specified values
     """
@@ -29,7 +29,7 @@ def genMatrix2(size=10, value=5):
 
 
 
-def genMatrix3(size=10, value=0):
+def genMatrix3(size=200, value=0):
     """
     Generates a 2d square matrix of the specified size with the specified values
     """
@@ -85,7 +85,7 @@ def multiplyMatrices(matrixA, matrixB):
  
  
  
-parallel_product_array = pymp.shared.array((10,10),dtype=np.intc) # generate array for parallel computation
+parallel_product_array = pymp.shared.array((200,200),dtype=np.intc) # generate array for parallel computation
  
      
 def parallelMultiply(matrixA, matrixB):
@@ -98,7 +98,7 @@ def parallelMultiply(matrixA, matrixB):
     length = len(parallel_product_array)
     start_time = time.time()
     
-    with pymp.Parallel(1) as p:
+    with pymp.Parallel(8) as p:
         for i in p.range(0, length):  # using same length since only accounting for m*m array
             for j in range(0,length):  
                 for k in range(0,length): 
@@ -114,13 +114,18 @@ array2 = genMatrix2()
 
 print("-------------------------Serial Multiplication------------------------------------------")
 
-multiplyMatrices(array1,array2)
+#multiplyMatrices(array1,array2)
 
 print("-------------------------Parallel Multiplication----------------------------------------")
 
 parallelMultiply(array1,array2)
 
+# Serial = Approx 18.78 seconds for array size 200
 
+# Parallel = 1 Thread  60.9174s
+#            2 Threads 22.6370s
+#            4 Threads 19.3492s
+#            8 Threads 16.2354
 
 
 
