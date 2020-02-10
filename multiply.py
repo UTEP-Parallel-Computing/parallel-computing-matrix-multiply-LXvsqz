@@ -57,7 +57,6 @@ def getColLength(ArrayX):
 
 
 def multiplyMatrices(matrixA, matrixB):
-
     """"
     Generate the product of two 2d square matrices with specified values and
     print results along with time of computation
@@ -83,8 +82,23 @@ def multiplyMatrices(matrixA, matrixB):
     
     
 def parallelMultiply(matrixA, matrixB, matrixC):
+    rowA = getRowLength(matrixA)  # length of row from matrixA
+    rowB = getRowLength(matrixB)  # length of row from matrixB
+    colB = getColLength(matrixB)  # length of col from matrixB
+    
     with pymp.Parallel(4) as p:
-       print("Hello from thread {} of {}".format(p.thread_num, p.num_threads)) 
+        
+        
+        start_time = time.time()
+    
+        for i in range(0, 200):  # rows of first matrix
+            for j in range(0,200):  # column of matrixB
+                for k in range(0,200):  # rows of matrixB
+                    matrixC[i][j] += matrixA[i][k] * matrixB[k][j]
+                    #print("Thread %d", p.thread_num)
+
+        total_time = time.time() - start_time  
+    print(printSubarray(matrixC), 10)
     
     
     
@@ -100,5 +114,14 @@ array2 = genMatrix2()
 
 
 
-multiplyMatrices(array1, array2)
-#testParallel()
+multiplyMatrices(array1,array2)
+print("-------------------------------------------------------------------")
+
+parallelMultiply(array1,array2,testArray)
+
+
+
+
+
+
+
