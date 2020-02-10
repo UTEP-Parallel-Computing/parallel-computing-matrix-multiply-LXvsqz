@@ -2,6 +2,7 @@ This lab demonstrates is the first part of demonstrating how using multiple core
 
 Serial: 18.78 Seconds
 
+
 Parallel:
 1 Thread: 60.9174s
 2 Threads: 22.6370s
@@ -14,6 +15,7 @@ There were a couple of difficulties I had with this lab, none of which being sev
 
 Thankfully the different functions provided in matrixUtils.py saved me from the headache of things such as printing only a certain amount of the array. For the parallel part of the lab, figuring out the correct format to create a shared array was a problem. Though this is very very simple, I kept getting simple errors pertaining to the dytpe. I overcame this by following the word doc provided. Another problem I had was making sure that i was using pyMP the correct way. It felt a little simple so i thought I was messing up somewhere. After meeting with Professor Pruitt, I had a clear understanding of what exactly was happening with the threads being spawned. I am unsure if i am timing the computation the correct way, I did not get the chance to ask. Lastly this assignment took me a total of 3-4 hours to complete. 
 
-Overall, this assignment helped me see how slow computations can be when we do this lab in the traditional, non parallel way.
+Overall, this assignment helped me "get my feet wet" in the parallel world. It was very interesting to see how we could use multiple threads to handle the computations for a shared memory array. I would love to make sure I timed the computations the correct way with Professor Pruit. Other than that, I felt like learned and understood a great deal from both parts of the assignemnt.
+
 
 -------------
