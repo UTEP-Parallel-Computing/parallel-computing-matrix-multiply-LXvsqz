@@ -114,7 +114,7 @@ array2 = genMatrix2()
 
 print("-------------------------Serial Multiplication------------------------------------------")
 
-#multiplyMatrices(array1,array2)
+multiplyMatrices(array1,array2)
 
 print("-------------------------Parallel Multiplication----------------------------------------")
 
